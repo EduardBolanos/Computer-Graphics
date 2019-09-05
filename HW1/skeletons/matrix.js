@@ -56,13 +56,28 @@ class Matrix
 	// don't forget, the inputs and result are in column-major form!
 	static mul(mat1, mat2)
 	{
-		var 
+		var result = [];
+		for (var col = 0; col < 4; col++) {
+			for (var row = 0; row < 4; row++) {
+				var temp = 0;
+				for (var i = 0; i < 4; i++) {
+					temp += mat1[row+4*i] * mat2[4*col+i];
+				}
+				result.push(temp);
+			}
+		}
+
+		return new Float32Array(result);
 	}
 
 	// given an array or list of matrices, multiplies them all (in order) and returns the result
 	static prod(mats)
 	{
-		
+		var result = mats[0];
+		for (var i = 1; i < mats.length; i++) {
+			result = Matrix.mul(result, mats[i]);
+		}
+		return result;
 	}
 
 	// given a position (vector), rotation (quaternion) and scale (vector)
