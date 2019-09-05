@@ -4,7 +4,9 @@ We will take a modular approach to build an in-browser graphics engine, which we
 
 ## Labs
 Lab 01: Triangle Demo
+
 Lab 02: Vectors and Matrices
+
 Lab 03: Quanternions and Rotation
 
 ## Homework
