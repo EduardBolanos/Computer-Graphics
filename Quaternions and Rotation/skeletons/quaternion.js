@@ -18,13 +18,20 @@ class Quaternion
 	// should set components "this.w, this.x, this.y, this.z" as detailed in slides
 	constructor(theta=0, x=1, y=0, z=0, normalized=false)
 	{
+		if(normalized)
+		{
+			this.set(w, x, y, z);
+		}
 		
 	}
 
 	// sets this quaternion's components to the inputs
 	set(w, x, y, z)
 	{
-		
+		this.w = w;
+		this.x = x;
+		this.y = y;
+		this.z = z;	
 	}
 
 	// returns the inverse quaternion as detailed in slides
@@ -32,7 +39,7 @@ class Quaternion
 	// because while we may use non-normalized quaternions, we will not need to invert them!
 	inverse()
 	{
-		
+		return new Quaternion(-this.w,-this.x,-this.y,-this.z);
 	}
 
 	// keep the w component the same
@@ -97,6 +104,6 @@ class Quaternion
 	// because we might be rotating a non-normalized pure quaternion if we're rotating a vector!
 	static composition(quats) // given q1, q2, q3 returns q3 * q2 * q1
 	{
-		
+		//TODO: Later on, idk what lab, oof
 	}
 }

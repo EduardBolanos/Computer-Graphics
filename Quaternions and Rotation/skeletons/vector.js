@@ -88,6 +88,10 @@ class Vector
 	rotate(q, inplace=true)
 	{
 		//TODO: LAB 3 I GUESS???
+		if(!inplace)
+		{
+			return new fromQuaternion()
+		}
 	}
 
 	// unit vector in the same direction as this vector
