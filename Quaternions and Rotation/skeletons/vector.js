@@ -87,11 +87,25 @@ class Vector
 	// REQUIRES QUATERNIONS
 	rotate(q, inplace=true)
 	{
-		//TODO: LAB 3 I GUESS???
+		var v = new Vector(this.x, this.y, this.z);
+		var u = new Vector(q.x, q.y, q.z);
+		var s = q.w;
+
+		var vprime = 2 * Vector.dot(u, v);
+		var vprime2 = q.w*q.w - dot(u,u);
+		var vprime3 = 2*q.w;
+
+		var result = u.scale(new Vector(vprime, vprime, vprime), false)
+		.add(this.scale(new Vector(vprime2, vprime2, vprime2), false), false)
+		.add(Vector.cross(u, this).scale(new Vector(vprime3, vprime3, vprime3)));
+
 		if(!inplace)
 		{
-			return new fromQuaternion()
+			return result;
 		}
+
+		this.set(result.x, result.y, result.z);
+		return this;
 	}
 
 	// unit vector in the same direction as this vector
@@ -129,7 +143,12 @@ class Vector
 	// returns their sum (i.e. add up all x components to get x... and so on)
 	static sum(vectors)
 	{
-		return this.x + this.y + this.z;
+		//Apprently the previous answer was wrong because idunno.
+		var result = new Vector();
+		for (var index = 1; index < result.length; index++) {
+			result.add(index);
+		}
+		return result;
 	}
 
 	// returns the cross product of the two input vectors "v1" and "v2"
@@ -156,6 +175,6 @@ class Vector
 	// REQUIRES QUATERNIONS
 	static fromQuaternion(q)
 	{
-		//TODO: LAB 3 I GUESSS???
+		return new Vector(q.x, q.y, q.z);
 	}
 }

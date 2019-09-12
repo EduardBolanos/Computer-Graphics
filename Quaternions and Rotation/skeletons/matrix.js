@@ -39,7 +39,23 @@ class Matrix
 	// REQUIRES QUATERNIONS
 	static rotation(quat)
 	{
-		//TODO Lab 3
+		//Big brain math from this website
+			//https://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/index.htm
+		return new Float32Array([
+			1 - 2*quat[2]*quat[2] - 2*quat[3]*quat[3],
+			2*quat[1]*quat[2] + 2*quat[3]*quat[0],
+			2*quat[1]*quat[3] - 2*quat[2]*quat[0],
+			0,
+			2*quat[1]*quat[2] - 2*quat[3]*quat[0],
+			1 - 2*quat[1] - 2*quat[3],
+			2*quat[2]*quat[3] + 2*quat[1]*quat[0],
+			0,
+			2*quat[1]*quat[3] + 2*quat[2]*quat[0],
+			2*quat[2]*quat[3] - 2*quat[1]*quat[0],
+			1 - 2*quat[1] - 2*quat[2],
+			0,
+			0,0,0,1
+		])
 	}
 
 	// given a 3d vector, returns the corresponding scale matrix
@@ -84,7 +100,7 @@ class Matrix
 	// returns the corresponding world matrix
 	static world(position, rotation, scale)
 	{
-		//TODO LAB 3
+		//TODO idk when??
 	}
 
 	// THE MATRICES BELOW WILL BE DONE IN THE 2ND HALF OF THE SEMESTER
@@ -95,7 +111,7 @@ class Matrix
 	// with local upward direction "up"
 	static view(eye, target, up)
 	{
-		//TODO LAB 3
+		//TODO idk when??
 	}
 
 	// "viewRadians" = vertical field of view, in radians
@@ -105,13 +121,13 @@ class Matrix
 	// returns corresponding perspective projection matrix
 	static perspective(viewRadians=Math.PI/4, aspect=1, near=0.1, far=1000.0)
 	{
-		//TDO LAB 3	
+		//TODO idk when??
 	}
 
 	// given left, right, bottom, top bounds of view and near / far distances
 	// returns corresponding orthographic projection matrix
 	static orthographic(left=-2, right=2, bottom=-2, top=2, near=0.1, far=1000.0)
 	{
-		//TODO LAB 3
+		//TODO idk when??
 	}
 }

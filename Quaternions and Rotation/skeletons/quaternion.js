@@ -18,11 +18,22 @@ class Quaternion
 	// should set components "this.w, this.x, this.y, this.z" as detailed in slides
 	constructor(theta=0, x=1, y=0, z=0, normalized=false)
 	{
-		if(normalized)
+		var magnitude = 0;
+		if(!normalized)
 		{
-			this.set(w, x, y, z);
+			//BDE, FPS & DE
+			magnitude = Math.sqrt(Math.pow(x, 2), Math.pow(y, 2), Math.pow(z, 2));
+			this.w = Math.cos(theta / 2);
+			this.x = (x * Math.sin(theta / 2)) / magnitude;
+			this.y = (y * Math.sin(theta / 2)) / magnitude;
+			this.z = (z * Math.sin(theta / 2)) / magnitude;
+		}else
+		{
+			this.w = Math.cos(theta/2);
+			this.x = x * Math.sin(theta / 2);
+			this.y = y * Math.sin(theta / 2);
+			this.z = z * Math.sin(theta / 2); 
 		}
-		
 	}
 
 	// sets this quaternion's components to the inputs
@@ -39,7 +50,11 @@ class Quaternion
 	// because while we may use non-normalized quaternions, we will not need to invert them!
 	inverse()
 	{
-		return new Quaternion(-this.w,-this.x,-this.y,-this.z);
+		var q = new Quaternion();
+
+		q.set(this.w,-this.x,-this.y,-this.z);
+
+		return q;
 	}
 
 	// keep the w component the same
@@ -49,7 +64,11 @@ class Quaternion
 	// HINT: use the pythagorean trig identity!
 	renormalize()
 	{
-		
+		var magnitude = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2));
+
+		this.x = ((this.x / magnitude) * Math.sqrt(1 - Math.pow(this.w, 2)));
+		this.y = ((this.y / magnitude) * Math.sqrt(1 - Math.pow(this.w, 2)));
+		this.z = ((this.z / magnitude) * Math.sqrt(1 - Math.pow(this.w, 2)));
 	}
 
 	 // multiply the input quaternion "q" on the left (i.e. get q * this)
@@ -85,7 +104,7 @@ class Quaternion
 	// something like "Quaternion (w, x, y, z)" but with the numerical values...
 	toString()
 	{
-		
+		return `Quaternion (${this.w}, ${this.x}, ${this.y}, ${this.z})`
 	}
 
 	// input vector "v"
