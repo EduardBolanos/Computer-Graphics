@@ -77,7 +77,12 @@ class Quaternion
 	 // NOTE: if "inplace" is false, renormalize the NEW quaternion and NOT this one
 	compose(q, inplace=true, renormalize=true)
 	{
-		
+		if(inplace && renormalize)
+		{
+			var temp = (q.w + q.x + q.y + q.z) * (this.w + this.x + this.y + this.z);
+
+			
+		}
 	}
 
 	// apply the rotation represented by this quaternion to the input quaternion "q"
@@ -87,7 +92,7 @@ class Quaternion
 	// HINT: compose multiplies from the left, so the inputs will need to be in reverse order!
 	applyRotation(q) // this * q * this.inverse(), i.e. apply this quaternion to another
 	{
-		
+		return Quaternion.composition([this.inverse(), q, this]);
 	}
 
 	// rotate by quaternion "q", but in local space
@@ -97,7 +102,8 @@ class Quaternion
 	// don't forget to account for "inplace"!
 	localCompose(q, inplace=true)
 	{
-		
+		var qnew = this.applyRotation(q);
+		return this.compose(qnew, inplace);
 	}
 
 	// return a string representation of this quaternion
