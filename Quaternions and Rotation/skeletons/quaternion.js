@@ -77,11 +77,38 @@ class Quaternion
 	 // NOTE: if "inplace" is false, renormalize the NEW quaternion and NOT this one
 	compose(q, inplace=true, renormalize=true)
 	{
-		if(inplace && renormalize)
-		{
-			var temp = (q.w + q.x + q.y + q.z) * (this.w + this.x + this.y + this.z);
+		var w = this.w;
+		var x = this.x;
+		var y = this.y;
+		var z = this.z;
 
-			
+		if(inplace)
+		{
+			this.w = (q.w * w) - (q.x * x) - (q.y * y) - (q.z * z);
+			this.x = (q.w * x) + (q.x * w) + (q.y * z) - (q.z * y);
+			this.y = (q.w * y) + (q.y * w) + (q.z * x) - (q.x * z);
+			this.z = (q.w * z) + (q.z * w) + (q.x * y) - (q.y * x);
+
+			if(renormalize)
+			{
+				this.renormalize();
+			}
+		}
+		else
+		{
+			var newQuaternion = new Quaternion();
+
+			newQuaternion.w = (q.w * w) - (q.x * x) - (q.y * y) - (q.z * z);
+			newQuaternion.x = (q.w * x) + (q.x * w) + (q.y * z) - (q.z * y);
+			newQuaternion.y = (q.w * y) + (q.y * w) + (q.z * x) - (q.x * z);
+			newQuaternion.z = (q.w * z) + (q.z * w) + (q.x * y) - (q.y * x);
+
+			if(renormalize)
+			{
+				newQuaternion.renormalize();
+			}
+
+			return newQuaternion;
 		}
 	}
 
