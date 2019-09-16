@@ -160,5 +160,13 @@ class Quaternion
 	static composition(quats) // given q1, q2, q3 returns q3 * q2 * q1
 	{
 		//TODO: Later on, idk what lab, oof
+
+		var result = quats[quats.length-1];
+
+		for (var index = quats.length-2; index >= 0; index--) {
+			result = quats[index].compose(result, false, false);
+		}
+
+		return result;
 	}
 }

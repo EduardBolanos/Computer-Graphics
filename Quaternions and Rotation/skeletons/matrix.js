@@ -39,23 +39,27 @@ class Matrix
 	// REQUIRES QUATERNIONS
 	static rotation(quat)
 	{
+
 		//Big brain math from this website
 			//https://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/index.htm
-		return new Float32Array([
-			1 - 2*quat[2]*quat[2] - 2*quat[3]*quat[3],
-			2*quat[1]*quat[2] + 2*quat[3]*quat[0],
-			2*quat[1]*quat[3] - 2*quat[2]*quat[0],
-			0,
-			2*quat[1]*quat[2] - 2*quat[3]*quat[0],
-			1 - 2*quat[1] - 2*quat[3],
-			2*quat[2]*quat[3] + 2*quat[1]*quat[0],
-			0,
-			2*quat[1]*quat[3] + 2*quat[2]*quat[0],
-			2*quat[2]*quat[3] - 2*quat[1]*quat[0],
-			1 - 2*quat[1] - 2*quat[2],
-			0,
-			0,0,0,1
-		])
+			
+			quat.renormalize();
+			var cell_0 = 1 - 2*Math.pow(quat.y, 2) - 2*Math.pow(quat.z, 2);
+			var cell_1 = 2*quat[1]*quat[2] + 2*quat[3]*quat[0];
+			var cell_2 = 2*quat[1]*quat[3] - 2*quat[2]*quat[0];
+
+			var cell_3 = 2*quat[1]*quat[2] - 2*quat[3]*quat[0];
+			var cell_4 = 1 - 2*quat[1]*quat[1] - 2*quat[3]*quat[3];
+			var cell_5 = 2*quat[2]*quat[3] + 2*quat[1]*quat[0];
+
+			var cell_6 = 2*quat[1]*quat[3] + 2*quat[2]*quat[0];
+			var cell_7 = 2*quat[2]*quat[3] - 2*quat[1]*quat[0];
+			var cell_8 = 1 - 2*quat[1]*quat[1] - 2*quat[2]*quat[2];
+
+			var matrix = [cell_0, cell_1, cell_2, 0, cell_3, cell_4, cell_5, 0,
+			cell_6, cell_7, cell_8, 0, 0, 0, 0, 1];
+
+		return new Float32Array(matrix);
 	}
 
 	// given a 3d vector, returns the corresponding scale matrix

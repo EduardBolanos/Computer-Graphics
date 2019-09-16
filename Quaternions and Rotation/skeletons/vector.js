@@ -87,25 +87,19 @@ class Vector
 	// REQUIRES QUATERNIONS
 	rotate(q, inplace=true)
 	{
-		var v = new Vector(this.x, this.y, this.z);
-		var u = new Vector(q.x, q.y, q.z);
-		var s = q.w;
-
-		var vprime = 2 * Vector.dot(u, v);
-		var vprime2 = q.w*q.w - dot(u,u);
-		var vprime3 = 2*q.w;
-
-		var result = u.scale(new Vector(vprime, vprime, vprime), false)
-		.add(this.scale(new Vector(vprime2, vprime2, vprime2), false), false)
-		.add(Vector.cross(u, this).scale(new Vector(vprime3, vprime3, vprime3)));
-
-		if(!inplace)
+		if(inplace)
 		{
-			return result;
-		}
+			var vector = Vector.fromQuaternion(q.applyRotation(Quaternion.fromVector(this)));
 
-		this.set(result.x, result.y, result.z);
-		return this;
+			this.x = vector.x;
+			this.y = vector.y;
+			this.z = vector.z;
+		}
+		else
+		{
+			//var vector = this;
+			return Vector.fromQuaternion(q.applyRotation(Quaternion.fromVector(this)));
+		}
 	}
 
 	// unit vector in the same direction as this vector
