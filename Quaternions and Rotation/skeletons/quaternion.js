@@ -146,7 +146,10 @@ class Quaternion
 	// instead make a new quaternion and then use its "set" function before returning it
 	static fromVector(v)
 	{
-		
+		var newQuaternion = new Quaternion();
+		newQuaternion.set(0, v.x, v.y, v.z);
+
+		return newQuaternion;
 	}
 
 	// given a list of quaternions, compose them chronologically
