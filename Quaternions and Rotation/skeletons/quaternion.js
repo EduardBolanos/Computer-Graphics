@@ -22,7 +22,7 @@ class Quaternion
 		if(!normalized)
 		{
 			//BDE, FPS & DE
-			magnitude = Math.sqrt(Math.pow(x, 2), Math.pow(y, 2), Math.pow(z, 2));
+			magnitude = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
 			this.w = Math.cos(theta / 2);
 			this.x = (x * Math.sin(theta / 2)) / magnitude;
 			this.y = (y * Math.sin(theta / 2)) / magnitude;
