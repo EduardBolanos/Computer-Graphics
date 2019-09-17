@@ -48,7 +48,7 @@ class Matrix
 		//Big brain math from this website
 			//https://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/index.htm
 			
-			quat.renormalize();
+			
 			var cell_0 = 1 - 2*Math.pow(quat.y, 2) - 2*Math.pow(quat.z, 2);
 			var cell_1 = 2*q.x*q.y + 2*q.z*q.w;
 			var cell_2 = 2*q.x*q.z - 2*q.y*q.w;
@@ -109,7 +109,7 @@ class Matrix
 	// returns the corresponding world matrix
 	static world(position, rotation, scale)
 	{
-		//TODO idk when??
+		return this.prod([position, rotation, scale]);
 	}
 
 	// THE MATRICES BELOW WILL BE DONE IN THE 2ND HALF OF THE SEMESTER
@@ -120,7 +120,7 @@ class Matrix
 	// with local upward direction "up"
 	static view(eye, target, up)
 	{
-		//TODO idk when??
+		//TODO later
 	}
 
 	// "viewRadians" = vertical field of view, in radians
@@ -130,13 +130,27 @@ class Matrix
 	// returns corresponding perspective projection matrix
 	static perspective(viewRadians=Math.PI/4, aspect=1, near=0.1, far=1000.0)
 	{
-		//TODO idk when??
+		//TODO later
 	}
 
 	// given left, right, bottom, top bounds of view and near / far distances
 	// returns corresponding orthographic projection matrix
 	static orthographic(left=-2, right=2, bottom=-2, top=2, near=0.1, far=1000.0)
 	{
-		//TODO idk when??
+		//TODO might be done, who knows? Not really important; optional 
+
+		var tmb = top-bottom;
+		var fmn = far-near;
+		var rml = right-left;
+		var rpl = right+left;
+		var tpb = top+bottom;
+		var fpn = far+near;
+
+		return new Float32Array([
+			2/rml, 0, 0, 0,
+			0, 2/tmb, 0, 0,
+			0, 0, -2/fmn, 0,
+			-rpl/rml, -tpb/tmb, -fpn/fmn, 1
+		]);
 	}
 }

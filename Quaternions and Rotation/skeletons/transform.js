@@ -25,7 +25,20 @@ class Transform
 	// initiate the booleans (hasMoved, hasRotated, hasScaled, needsUpate) to false.
 	constructor (position=new Vector(), rotation=new Quaternion(), scale=new Vector(1, 1, 1))
 	{
+		this.setPosition(position);
+		this.setRotation(rotation);
+		this.setScale(scale);
 
+		this.mTranslate = Matrix.translation(position);
+		this.mRotate =  Matrix.rotation(rotation);
+		this.mScale = Matrix.scale(scale);
+
+		this.mWorld = Matrix.world(position,rotation,scale);
+
+		this.hasMoved = false;
+		this.hasRotated = false;
+		this.hasScaled = false;
+		this.needsUpdate = false;
 	}
 
 	// set this transform's position to the input vector.
@@ -41,14 +54,18 @@ class Transform
 	// set the necessary booleans (hasRotated and needsUpdate) to true.
 	setRotation(quat)
 	{
-
+		this.quat = quat;
+		this.hasRotated = true;
+		this.needsUpdate = true;
 	}
 
 	// set this transform's scale to the input vector.
 	// set the necessary booleans (hasScaled and needsUpdate) to true.
 	setScale(scale)
 	{
-		
+		this.scale = scale;
+		this.hasScaled = true;
+		this.needsUpdate = true;
 	}
 
 	// translate by the input vector (i.e. add the input vector to the position)
