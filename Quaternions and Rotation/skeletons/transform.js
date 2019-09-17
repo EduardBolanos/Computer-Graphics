@@ -25,14 +25,16 @@ class Transform
 	// initiate the booleans (hasMoved, hasRotated, hasScaled, needsUpate) to false.
 	constructor (position=new Vector(), rotation=new Quaternion(), scale=new Vector(1, 1, 1))
 	{
-		
+
 	}
 
 	// set this transform's position to the input vector.
 	// set the necessary booleans (hasMoved and needsUpdate) to true.
 	setPosition(vector)
 	{
-		
+		this.vector = vector;
+		this.hasMoved = true;
+		this.needsUpdate = true;
 	}
 
 	// set this transform's rotation to the input quaternion.
