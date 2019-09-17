@@ -1,3 +1,7 @@
+/*
+	Eduard Bolanos
+	Lab 03 - Quaternions and Rotation
+*/
 // QUATERNION CLASS DESCRIPTION
 /*
 	The Quaternion class will 4-component structure to represent and apply rotations.

@@ -1,4 +1,7 @@
-//Eduard Bolanos
+/*
+	Eduard Bolanos
+	Lab 03 - Quaternions and Rotation
+*/
 // VECTOR CLASS DESCRIPTION:
 /* 
 	The Vector class will be a simple 3D vector

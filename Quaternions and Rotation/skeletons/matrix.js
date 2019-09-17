@@ -1,3 +1,8 @@
+/*
+	Eduard Bolanos
+	Lab 03 - Quaternions and Rotation
+*/
+
 // MATRIX CLASS DESCRIPTION:
 /*
 	The Matrix class will contain utilities for generating and manipulating
@@ -45,16 +50,16 @@ class Matrix
 			
 			quat.renormalize();
 			var cell_0 = 1 - 2*Math.pow(quat.y, 2) - 2*Math.pow(quat.z, 2);
-			var cell_1 = 2*quat[1]*quat[2] + 2*quat[3]*quat[0];
-			var cell_2 = 2*quat[1]*quat[3] - 2*quat[2]*quat[0];
+			var cell_1 = 2*q.x*q.y + 2*q.z*q.w;
+			var cell_2 = 2*q.x*q.z - 2*q.y*q.w;
 
-			var cell_3 = 2*quat[1]*quat[2] - 2*quat[3]*quat[0];
-			var cell_4 = 1 - 2*quat[1]*quat[1] - 2*quat[3]*quat[3];
-			var cell_5 = 2*quat[2]*quat[3] + 2*quat[1]*quat[0];
+			var cell_3 = 2*q.x*q.y - 2*q.z*q.w;
+			var cell_4 = 1 - 2*q.x*q.x - 2*q.z*q.z;
+			var cell_5 = 2*q.y*q.z + 2*q.x*q.w;
 
-			var cell_6 = 2*quat[1]*quat[3] + 2*quat[2]*quat[0];
-			var cell_7 = 2*quat[2]*quat[3] - 2*quat[1]*quat[0];
-			var cell_8 = 1 - 2*quat[1]*quat[1] - 2*quat[2]*quat[2];
+			var cell_6 = 2*q.x*q.z + 2*q.y*q.w;
+			var cell_7 = 2*q.y*q.z - 2*q.x*q.w;
+			var cell_8 = 1 - 2*q.x*q.x - 2*q.y*q.y;
 
 			var matrix = [cell_0, cell_1, cell_2, 0, cell_3, cell_4, cell_5, 0,
 			cell_6, cell_7, cell_8, 0, 0, 0, 0, 1];
