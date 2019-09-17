@@ -109,7 +109,8 @@ class Matrix
 	// returns the corresponding world matrix
 	static world(position, rotation, scale)
 	{
-		return this.prod([position, rotation, scale]);
+		return Matrix.prod([Matrix.translation(position), Matrix.rotation(rotation), 
+			Matrix.scale(scale)]);
 	}
 
 	// THE MATRICES BELOW WILL BE DONE IN THE 2ND HALF OF THE SEMESTER

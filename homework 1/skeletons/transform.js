@@ -45,7 +45,7 @@ class Transform
 	// set the necessary booleans (hasMoved and needsUpdate) to true.
 	setPosition(vector)
 	{
-		this.vector = vector;
+		this.position = vector;
 		this.hasMoved = true;
 		this.needsUpdate = true;
 	}
@@ -53,7 +53,7 @@ class Transform
 	// set the necessary booleans (hasRotated and needsUpdate) to true.
 	setRotation(quat)
 	{
-		this.quat = quat;
+		this.rotation = quat;
 		this.hasRotated = true;
 		this.needsUpdate = true;
 	}
