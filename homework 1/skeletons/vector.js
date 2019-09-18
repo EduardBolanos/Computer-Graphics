@@ -1,7 +1,9 @@
 /*
 	Eduard Bolanos
-	Lab 03 - Quaternions and Rotation
+	Homework #1 - Transform
+	Comp-464: Computer Graphics
 */
+
 // VECTOR CLASS DESCRIPTION:
 /* 
 	The Vector class will be a simple 3D vector

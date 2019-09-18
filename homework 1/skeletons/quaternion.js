@@ -1,7 +1,9 @@
 /*
 	Eduard Bolanos
-	Lab 03 - Quaternions and Rotation
+	Homework #1 - Transform
+	Comp-464: Computer Graphics
 */
+
 // QUATERNION CLASS DESCRIPTION
 /*
 	The Quaternion class will 4-component structure to represent and apply rotations.

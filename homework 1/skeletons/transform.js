@@ -1,3 +1,9 @@
+/*
+	Eduard Bolanos
+	Homework #1 - Transform
+	Comp-464: Computer Graphics
+*/
+
 // TRANSFORM CLASS DESCRIPTION:
 /*
 	The Transform class will embody and manipulate position, rotation and scale
