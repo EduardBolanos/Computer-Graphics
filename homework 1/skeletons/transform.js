@@ -70,21 +70,28 @@ class Transform
 	// update necessary booleans...
 	translate(vector)
 	{
-		
+		this.position.add(vector, true);
+		this.hasMoved = true;
+		this.needsUpdate = true;
 	}
 
 	// rotate by the input quaternion (i.e. compose the input quaternion with the rotation)
 	// update necessary booleans...
 	rotate(quat)
 	{
-		
+		console.log("yeee");
+		this.rotation = this.rotation.applyRotation(quat);
+		this.hasRotated = true;
+		this.needsUpdate = true;
 	}
 
 	// rotate by the input quaternion in local space
 	// update necessary booleans...
 	localRotate(quat)
 	{
-		
+		this.rotation.localCompose(quat, true);
+		this.hasRotated = true;
+		this.needsUpdate = true;
 	}
 
 	// rotate the position vector about the vector "point" by the input quaternion "quat"
@@ -99,35 +106,39 @@ class Transform
 	// update necessary booleans...
 	scaleBy(vector)
 	{
-		
+		this.scale.scale(vector, true);
 	}
 
 	// update mTranslate so it reflects this transform's position
 	// set hasMoved to false, as any movements have now been incorporated
 	updateTranslationMatrix()
 	{
-		
+		this.mTranslate = Matrix.translation(this.position);
+		this.hasMoved = false;
 	}
 
 	// update mRotate so it reflects the transform's rotation
 	// update necessary boolean(s)
 	updateRotationMatrix()
 	{
-		
+		this.mRotate = Matrix.rotation(this.rotation);
+		this.hasRotated = false;
 	}
 
 	// update mScale so it reflects the transform's scale
 	// update necessary booleans...
 	updateScaleMatrix()
 	{
-		
+		this.mScale = Matrix.scale(this.scale)
+		this.hasScaled = false;
 	}
 
 	// update the world matrix to the product mTranslate * mRotate * mScale
 	// set needsUpdate to false, as all transformation changes are now incorporated
 	updateWorldMatrix()
 	{
-		
+		this.mWorld = Matrix.world(this.mTranslate*this.mRotate*this.mScale);
+		this.needsUpdate = false;
 	}
 
 	// if needsUpdate is false, don't do anything; no update is needed
