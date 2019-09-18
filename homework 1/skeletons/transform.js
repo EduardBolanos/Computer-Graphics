@@ -105,7 +105,13 @@ class Transform
 	// update necessary booleans...
 	rotateAround(point, quat)
 	{
-		
+		this.rotation.compose(quat, true);
+		this.position.subtract(point, true);
+		this.position.rotate(quat, true);
+		this.position.add(point, true);
+		this.hasRotated = true;
+		this.hasMoved = true;
+		this.needsUpdate = true;
 	}
 
 	// scale the x, y and z components of this transform's scale by those of the input vector
@@ -143,7 +149,8 @@ class Transform
 	// set needsUpdate to false, as all transformation changes are now incorporated
 	updateWorldMatrix()
 	{
-		this.mWorld = Matrix.world(this.mTranslate*this.mRotate*this.mScale);
+		this.mWorld = Matrix.mul(this.mTranslate, this.mRotate);
+		this.mWorld = Matrix.mul(this.mWorld, this.mScale);
 		this.needsUpdate = false;
 	}
 
@@ -158,6 +165,22 @@ class Transform
 	//		  do we need to update any booleans explicitly here?
 	update()
 	{
-		
+		if(this.needsUpdate == true)
+		{
+			if(this.hasMoved == true)
+			{
+				this.updateTranslationMatrix();
+			}
+			if(this.hasRotated == true)
+			{
+				this.updateRotationMatrix();
+			}
+			if(this.hasScaled == true)
+			{
+				this.updateScaleMatrix();
+			}
+
+			this.updateWorldMatrix();
+		}
 	}
 }
