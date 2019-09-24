@@ -9,5 +9,7 @@ Lab 02: Vectors and Matrices
 
 Lab 03: Quanternions and Rotation
 
+Lab 04: Mesh
+
 ## Homework
 Homework 01: Transform
