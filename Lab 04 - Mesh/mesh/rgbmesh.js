@@ -35,14 +35,18 @@ class RGBMesh extends Mesh
 		super.activate();
 
 		this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.colorBufferObject);
+		//enable vertex for normal and color but do them seperate.
+
 		this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.normalBufferObject);
 
-				
+		
 	}
 
 	draw()
 	{
 		super.draw();
+
+		//unbind the color and normal
 
 	}
 }
