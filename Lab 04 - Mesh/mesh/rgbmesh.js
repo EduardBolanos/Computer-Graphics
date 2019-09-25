@@ -20,9 +20,9 @@ class RGBMesh extends Mesh
 		this.gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
 		this.normalBufferObject = this.gl.createBuffer();
-		this.gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.normalBufferObject);
-		this.gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, this.normalArray, this.gl.STATIC_DRAW);
-		this.gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+		this.gl.bindBuffer(gl.ARRAY_BUFFER, this.normalBufferObject);
+		this.gl.bufferData(gl.ARRAY_BUFFER, this.normalArray, this.gl.STATIC_DRAW);
+		this.gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
 	}
 
@@ -34,7 +34,7 @@ class RGBMesh extends Mesh
 	{
 		super.activate();
 
-		this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.colorBufferObject);
+		this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.colorBufferObject);
 		//enable vertex for normal and color but do them seperate.
 		this.gl.enableVertexAttribArray(this.coloAttribLocation);
 		this.gl.vertexAttribPointer(
