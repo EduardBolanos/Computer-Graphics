@@ -71,7 +71,7 @@ var RunDemo = function (filemap)
 	gl.uniformMatrix4fv(matProjUniformLocation, gl.FALSE, projMatrix);
 
 	// set ambient light
-	var ambientLight = [0.2, 0.3, 0.2];
+	var ambientLight = [0.0, 0.3, 0.2];
 	var ambientLightUniformLocation = gl.getUniformLocation(rgbProgram, 'ambientLight');
 	gl.uniform3fv(ambientLightUniformLocation, ambientLight);
 
@@ -84,145 +84,25 @@ var RunDemo = function (filemap)
 	gl.uniform3fv(lightIntensityUniformLocation, lightIntensity);
 
 	// set up position and index arrays for a cube
-	var cubePositionArray = [
-		// top			
-		-0.5, 0.5, -0.5,
-		0.5, 0.5, -0.5, 
-		0.5, 0.5, 0.5,  
-		-0.5, 0.5, 0.5, 
-		// bottom
-		-0.5, -0.5, -0.5,
-		-0.5, -0.5, 0.5,
-		0.5, -0.5, 0.5,
-		0.5, -0.5, -0.5,
-		// right
-		-0.5, -0.5, -0.5,
-		-0.5, 0.5, -0.5, 
-		-0.5, 0.5, 0.5,		 
-		-0.5, -0.5, 0.5, 
-		// left
-		0.5, -0.5, -0.5,
-		0.5, -0.5, 0.5, 
-		0.5, 0.5, 0.5,		 
-		0.5, 0.5, -0.5, 
-		// back
-		-0.5, -0.5, -0.5,
-		0.5, -0.5, -0.5,
-		0.5, 0.5, -0.5, 
-		-0.5, 0.5, -0.5,
-		// front
-		-0.5, -0.5, 0.5,
-		-0.5, 0.5, 0.5, 
-		0.5, 0.5, 0.5, 		
-		0.5, -0.5, 0.5
-	];
-
-	var cubeIndexArray = [
-		// top
-		0, 2, 1,
-		0, 3, 2,
-		// bottom
-		4, 6, 5,
-		4, 7, 6,
-		// right
-		8, 10, 9,
-		8, 11, 10,
-		// left
-		12, 14, 13,
-		12, 15, 14,
-		// back
-		16, 18, 17,
-		16, 19, 18,
-		// front
-		20, 22, 21,
-		20, 23, 22
-	];
-
 	// create cube using Mesh class
-	var meshCube = new Mesh(
+	var meshCube = Cube.create(
 		gl, // WebGL context
 		rgbProgram, // shader program to use to draw this
-		cubePositionArray, // position attribute array
-		cubeIndexArray // index array
+		[210/255, 255/255, 210/255],
+		new Vector(5,0,0)
 	);
 
-	meshCube.translate(new Vector(5,0,0));
+	//meshCube.translate();
 
-	var cubeNormalArray = [	
-		0, 1, 0,
-		0, 1, 0,
-		0, 1, 0,
-		0, 1, 0,
 
-		0, -1, 0,
-		0, -1, 0,
-		0, -1, 0,
-		0, -1, 0,
-
-		-1, 0, 0,
-		-1, 0, 0,
-		-1, 0, 0,
-		-1, 0, 0,
-
-		1, 0, 0,
-		1, 0, 0,
-		1, 0, 0,
-		1, 0, 0,
-
-		0, 0, -1,
-		0, 0, -1,
-		0, 0, -1,
-		0, 0, -1,
-
-		0, 0, 1,
-		0, 0, 1,
-		0, 0, 1,
-		0, 0, 1
-	];
-
-	var cubeColorArray = [
-		// top / bottom is green
-		0.0, 1.0, 0.0,
-		0.0, 1.0, 0.0,
-		0.0, 1.0, 0.0,
-		0.0, 1.0, 0.0,
-		
-		0.0, 1.0, 0.0,
-		0.0, 1.0, 0.0,
-		0.0, 1.0, 0.0,
-		0.0, 1.0, 0.0,
-		// left / right is red
-		1.0, 0.0, 0.0,
-		1.0, 0.0, 0.0,
- 		1.0, 0.0, 0.0,
-		1.0, 0.0, 0.0,
-		
-		1.0, 0.0, 0.0,
-		1.0, 0.0, 0.0,
- 		1.0, 0.0, 0.0,
-		1.0, 0.0, 0.0,
-		// front / back is blue
-		0.0, 0.0, 1.0,
-		0.0, 0.0, 1.0,
- 		0.0, 0.0, 1.0,
-		0.0, 0.0, 1.0,
-
-		0.0, 0.0, 1.0,
-		0.0, 0.0, 1.0,
- 		0.0, 0.0, 1.0,
-		0.0, 0.0, 1.0
-	];
-
-	var rgbCube = new RGBMesh(
+	var rgbCube = Cube.create(
 		gl, // WebGL context
 		rgbProgram, // shader program to use to draw this
-		cubePositionArray, // position attribute array
-		cubeIndexArray, // index array
-		cubeNormalArray,
-		cubeColorArray
+		[210/255,210/255,255/255],
+		new Vector(-5,0,0),
 	);
 
-	rgbCube.translate(new Vector(-5,0,0));
+	//rgbCube.translate();
 
 	var angle = Math.PI / 100;
 	var origin = new Vector();
