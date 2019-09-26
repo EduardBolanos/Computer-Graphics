@@ -1,3 +1,8 @@
+/*	Eduard Bolanos
+	COARTIT-464 Sec01L
+	9/25/2019
+	Lab 04 Mesh
+*/
 var RunDemo = function (filemap)
 {
 	console.log("Initializing Demo");
