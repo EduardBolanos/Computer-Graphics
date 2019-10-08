@@ -153,158 +153,23 @@ var RunDemo = function (filemap)
 	gl.uniform3fv(lightDirectionUniformLocation, lightDirection);
 	gl.uniform3fv(lightIntensityUniformLocation, lightIntensity);
 
-	/* 
-		remove all of these arrays, through where the two cubes are created,
-		and replace them with calls to Cube.create once you've completed
-		Cube.create (start by copying your cube class from the previous
-		lab into shapes.js, then edit it to work for UV mesh as well!)
-	*/
-	// set up position and index arrays for a cube
-	var cubePositionArray = [
-		// top			
-		-0.5, 0.5, -0.5,
-		0.5, 0.5, -0.5, 
-		0.5, 0.5, 0.5,  
-		-0.5, 0.5, 0.5, 
-		// bottom
-		-0.5, -0.5, -0.5,
-		-0.5, -0.5, 0.5,
-		0.5, -0.5, 0.5,
-		0.5, -0.5, -0.5,
-		// right
-		-0.5, -0.5, -0.5,
-		-0.5, 0.5, -0.5, 
-		-0.5, 0.5, 0.5,		 
-		-0.5, -0.5, 0.5, 
-		// left
-		0.5, -0.5, -0.5,
-		0.5, -0.5, 0.5, 
-		0.5, 0.5, 0.5,		 
-		0.5, 0.5, -0.5, 
-		// back
-		-0.5, -0.5, -0.5,
-		0.5, -0.5, -0.5,
-		0.5, 0.5, -0.5, 
-		-0.5, 0.5, -0.5,
-		// front
-		-0.5, -0.5, 0.5,
-		-0.5, 0.5, 0.5, 
-		0.5, 0.5, 0.5, 		
-		0.5, -0.5, 0.5
-	];
-
-	var cubeIndexArray = [
-		// top
-		0, 2, 1,
-		0, 3, 2,
-		// bottom
-		4, 6, 5,
-		4, 7, 6,
-		// right
-		8, 10, 9,
-		8, 11, 10,
-		// left
-		12, 14, 13,
-		12, 15, 14,
-		// back
-		16, 18, 17,
-		16, 19, 18,
-		// front
-		20, 22, 21,
-		20, 23, 22
-	];
-
-	var cubeNormalArray = [	
-		0, 1, 0,
-		0, 1, 0,
-		0, 1, 0,
-		0, 1, 0,
-
-		0, -1, 0,
-		0, -1, 0,
-		0, -1, 0,
-		0, -1, 0,
-
-		-1, 0, 0,
-		-1, 0, 0,
-		-1, 0, 0,
-		-1, 0, 0,
-
-		1, 0, 0,
-		1, 0, 0,
-		1, 0, 0,
-		1, 0, 0,
-
-		0, 0, -1,
-		0, 0, -1,
-		0, 0, -1,
-		0, 0, -1,
-
-		0, 0, 1,
-		0, 0, 1,
-		0, 0, 1,
-		0, 0, 1
-	];
-
-	var cubeUVArray = [
-		// top
-		0, 1,
-		1, 1,
-		1, 0,
-		0, 0,
-		// bottom
-		0, 0,
-		0, 1,
-		1, 1,
-		1, 0,
-		// right
-		0, 0,
-		0, 1,
-		1, 1,
-		1, 0,
-		// left
-		1, 0,
-		0, 0,
-		0, 1,
-		1, 1,
-		// back
-		1, 0,
-		0, 0,
-		0, 1,
-		1, 1,
-		// front
-		0, 0,
-		0, 1,
-		1, 1,
-		1, 0
-	];
-
 	// create cube using Mesh class
-	var uvCube1 = new UVMesh(
+	var uvCube1 = Cube.uvcreate(
 		gl,
 		uvProgram,
-		cubePositionArray,
-		cubeIndexArray,
-		cubeNormalArray,
-		cubeUVArray,
 		'radioactive-crate',
 		false
 	);
 
-	var uvCube2 = new UVMesh(
+	var rgbCube2 = Cube.create(
 		gl,
-		uvProgram,
-		cubePositionArray,
-		cubeIndexArray,
-		cubeNormalArray,
-		cubeUVArray,
-		'radioactive-crate',
-		false
+		rgbProgram, // shader program to use to draw this
+		[210/255, 255/255, 210/255]
 	);
 
 
 	uvCube1.translate(new Vector(5,0,0));
-	uvCube2.translate(new Vector(-5,0,0));
+	rgbCube2.translate(new Vector(-5,0,0));
 
 	/* uncomment the two lines below once you've created the spheres*/
 	// rgbSphere.translate(new Vector(0,0,5));
@@ -323,9 +188,9 @@ var RunDemo = function (filemap)
 		uvCube1.localRotate(localRot);
 		uvCube1.draw();
 
-		uvCube2.localRotate(localRot);
-		uvCube2.rotateAround(origin, orbit);
-		uvCube2.draw();
+		rgbCube2.localRotate(localRot);
+		rgbCube2.rotateAround(origin, orbit);
+		rgbCube2.draw();
 
 		/* uncomment the six lines below once you've created the spheres */
 		// rgbSphere.localRotate(localRot);
