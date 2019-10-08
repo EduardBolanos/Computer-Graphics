@@ -11,5 +11,7 @@ Lab 03: Quanternions and Rotation
 
 Lab 04: Mesh
 
+Lab 05: Texturing and Spheres
+
 ## Homework
 Homework 01: Transform
