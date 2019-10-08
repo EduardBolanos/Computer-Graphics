@@ -7,18 +7,18 @@ class UVMesh extends Mesh
 		//construct the underlying mesh
 		super(gl, program, positionArray, indexArray, position, rotation, scale);
 
-		//store attribute locations
-		this.texCoordAttribLocation = gl.getAttribLocation(this.program, 'vertTexCoord');
-		this.normalAttribLocation = gl.getAttribLocation(this.program, 'vertNormal');
+		// store attribute locations
+		this.texCoordAttribLocation = gl.getAttribLocation(program, 'vertTexCoord');
+		this.normalAttribLocation = gl.getAttribLocation(program, 'vertNormal');
 
-		//make and populate buffer for vertex UV coordinates
+		// make and populate buffer for vertex UV coordinates
 		this.vertTexCoords = new Float32Array(uvArray);
 		this.texCoordBufferObject = gl.createBuffer();
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.texCoordBufferObject);
 		gl.bufferData(gl.ARRAY_BUFFER, this.vertTexCoords, gl.STATIC_DRAW);
 		gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
-		//setup our texture
+		// set up texture
 		this.textureObject = gl.createTexture();
 		gl.bindTexture(gl.TEXTURE_2D, this.textureObject);
 		gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, flipTexture);
@@ -27,7 +27,6 @@ class UVMesh extends Mesh
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
-		//getting image
 		gl.texImage2D(
 			gl.TEXTURE_2D,
 			0,
@@ -38,7 +37,7 @@ class UVMesh extends Mesh
 		)
 		gl.bindTexture(gl.TEXTURE_2D, null);
 
-		//vertex normal
+		// vertex normals
 		this.vertNormals = new Float32Array(normalArray);
 		this.normalBufferObject = gl.createBuffer();
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.normalBufferObject);
@@ -50,7 +49,7 @@ class UVMesh extends Mesh
 	{
 		super.activate();
 
-		this.gl.enableVertAttribArray(this.texCoordAttribLocation);
+		this.gl.enableVertexAttribArray(this.texCoordAttribLocation);
 		this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.texCoordBufferObject);
 		this.gl.vertexAttribPointer(
 			this.texCoordAttribLocation,
@@ -61,7 +60,7 @@ class UVMesh extends Mesh
 			0
 		);
 
-		this.gl.enableVertAttribArray(this.normalAttribLocation);
+		this.gl.enableVertexAttribArray(this.normalAttribLocation);
 		this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.normalBufferObject);
 		this.gl.vertexAttribPointer(
 			this.normalAttribLocation,

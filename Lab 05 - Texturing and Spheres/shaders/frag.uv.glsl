@@ -12,9 +12,9 @@ uniform vec3 lightIntensity;
 
 void main()
 {
-    vec4 texel = texture2D(sampler, fragTexCoord);
+	vec4 texel = texture2D(sampler, fragTexCoord);
 
-    vec3 light = ambientLight + lightIntensity * max(0.0, -dot(normalize(lightDirection), fragNormal));
+	vec3 light = ambientLight + lightIntensity * max( 0.0, -dot( normalize(lightDirection), fragNormal ) );
 
-    gl_FragColor = vec4(texel.rgb * light, texel.a);
+	gl_FragColor = vec4(texel.rgb * light, texel.a);
 }

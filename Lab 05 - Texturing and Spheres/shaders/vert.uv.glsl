@@ -14,8 +14,8 @@ uniform mat4 mProj;
 
 void main()
 {
-    fragPosition = (mWorld * vec4(vertPosition, 1.0)).xyz;
-    fragTexCoord = vertTexCoord;
-    fragNormal = (mWorld * vec4(vertNormal, 0.0)).xyz;
-    gl_Position = mProj * mView * mWorld * vec4(vertPosition, 1.0);
+	fragPosition = (mWorld * vec4(vertPosition, 1.0)).xyz;
+	fragTexCoord = vertTexCoord;
+	fragNormal = (mWorld * vec4(vertNormal, 0.0)).xyz;
+	gl_Position = mProj * mView * mWorld * vec4(vertPosition, 1.0);
 }
