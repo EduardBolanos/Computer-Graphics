@@ -172,8 +172,23 @@ var RunDemo = function (filemap)
 	rgbCube2.translate(new Vector(-5,0,0));
 
 	/* uncomment the two lines below once you've created the spheres*/
-	// rgbSphere.translate(new Vector(0,0,5));
-	// uvSphere.translate(new Vector(0,0,-5));
+	var uvSphere = Sphere.create(
+		gl,
+		uvProgram,
+		20,
+		20,
+		'earth-texture',
+		false
+	);
+	var rgbSphere = Sphere.createRGB(
+		gl,
+		rgbProgram,
+		20,
+		20,
+		[0, 0, 210/255]
+	);
+	rgbSphere.translate(new Vector(0,0,5));
+	uvSphere.translate(new Vector(0,0,-5));
 
 	var angle = Math.PI / 100;
 	var origin = new Vector();
@@ -193,13 +208,13 @@ var RunDemo = function (filemap)
 		rgbCube2.draw();
 
 		/* uncomment the six lines below once you've created the spheres */
-		// rgbSphere.localRotate(localRot);
-		// rgbSphere.rotateAround(origin, orbit);
-		// rgbSphere.draw();
+		rgbSphere.localRotate(localRot);
+		rgbSphere.rotateAround(origin, orbit);
+		rgbSphere.draw();
 
-		// uvSphere.localRotate(localRot);
-		// uvSphere.rotateAround(origin, orbit);
-		// uvSphere.draw();
+		uvSphere.localRotate(localRot);
+		uvSphere.rotateAround(origin, orbit);
+		uvSphere.draw();
 
 		requestAnimationFrame(main);
 	}
