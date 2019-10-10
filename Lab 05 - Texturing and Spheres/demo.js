@@ -171,13 +171,29 @@ var RunDemo = function (filemap)
 	uvCube1.translate(new Vector(5,0,0));
 	rgbCube2.translate(new Vector(-5,0,0));
 
-	/* uncomment the two lines below once you've created the spheres*/
+	/* creating spheres, with different spherical textures off google and 1 RGB sphere*/
 	var uvSphere = Sphere.create(
 		gl,
 		uvProgram,
 		20,
 		20,
 		'earth-texture',
+		false
+	);
+	var uvSphereTwo = Sphere.create(
+		gl,
+		uvProgram,
+		20,
+		20,
+		'nebula-texture',
+		false
+	);
+	var uvSphereThere = Sphere.create(
+		gl,
+		uvProgram,
+		20,
+		20,
+		'cool-texture',
 		false
 	);
 	var rgbSphere = Sphere.createRGB(
@@ -188,7 +204,9 @@ var RunDemo = function (filemap)
 		[0, 0, 210/255]
 	);
 	rgbSphere.translate(new Vector(0,0,5));
-	uvSphere.translate(new Vector(0,0,-5));
+	uvSphere.translate(new Vector(0,0,0));
+	uvSphereTwo.translate(new Vector(0,0,-5));
+	uvSphereThere.translate(new Vector(1,4,3));
 
 	var angle = Math.PI / 100;
 	var origin = new Vector();
@@ -207,7 +225,7 @@ var RunDemo = function (filemap)
 		rgbCube2.rotateAround(origin, orbit);
 		rgbCube2.draw();
 
-		/* uncomment the six lines below once you've created the spheres */
+		/* draws and makes the animation for the spheres */
 		rgbSphere.localRotate(localRot);
 		rgbSphere.rotateAround(origin, orbit);
 		rgbSphere.draw();
@@ -215,6 +233,14 @@ var RunDemo = function (filemap)
 		uvSphere.localRotate(localRot);
 		uvSphere.rotateAround(origin, orbit);
 		uvSphere.draw();
+
+		uvSphereTwo.localRotate(localRot);
+		uvSphereTwo.rotateAround(origin, orbit);
+		uvSphereTwo.draw();
+
+		uvSphereThere.localRotate(localRot);
+		uvSphereThere.rotateAround(origin, orbit);
+		uvSphereThere.draw();
 
 		requestAnimationFrame(main);
 	}
