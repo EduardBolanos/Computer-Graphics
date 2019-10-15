@@ -1,5 +1,7 @@
 /*	Eduard Bolanos
-    Lab 05 - Texturing and Spheres
+	COARTIT-464 Sec01L
+	10/9/2019
+	Lab 05 Textruing and Spheres
 */
 class Cube
 {
