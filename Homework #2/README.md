@@ -1,6 +1,6 @@
 # Homework #2: Models
 
-1. Implement the RGBMesh and UVMesh classes by extending Mesh (these will be done in the labs).
+1. Implement the RGBMesh and UVMesh classes by extending Mesh (these will be done in the labs 4 & 5).
 2. Implement utilities for the creation of textured cubes and spheres (this will be mostly done in Lab 5).
 3. Create at least 4 simple textured models of objects that are not shaped like regular solids. This is best done during or after Lab 6 with the use of Blender or other modelling software
     -   Some examples:
