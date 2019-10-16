@@ -114,10 +114,10 @@ var RunDemo = function (filemap)
 	// use imported JSONs / textures to create models
 	//change JSON to THREEJS
 	var cone = ThreeJSToUVMesh(filemap['coneJSON'], 'cone-texture', gl, uvProgram, true);
-	//var cube = ThreeJSToUVMesh(filemap['cubeJSON'], 'cube-texture', gl, uvProgram, true);
+	var table = ThreeJSToUVMesh(filemap['tableJSON'], 'table-texture', gl, uvProgram, true);
 
 	cone.translate(new Vector(-2, 0, 0));
-	//cube.translate(new Vector(2, 0, 0));
+	table.translate(new Vector(2, 0, 0));
 
 	// set up some arbitrary constants for motion
 	var angle = Math.PI / 100;
@@ -130,8 +130,8 @@ var RunDemo = function (filemap)
 		cone.rotate(rotation);
 		cone.draw();
 
-		//cube.rotate(rotation);
-		//cube.draw();
+		table.rotate(rotation);
+		table.draw();
 
 		requestAnimationFrame(main);
 	}
@@ -146,8 +146,8 @@ var InitDemo = function()
 		'shaders/frag.uv.glsl',
 		'shaders/vert.uv.glsl',
 		'shaders/frag.uv.glsl',
-		'models/cone.json'
-		//'models/cube.json'
+		'models/cone.json',
+		'models/table.json'
 	];
 
 	// imported file keys for file key-value map, respective
@@ -156,8 +156,8 @@ var InitDemo = function()
 		'uvFragShaderText',
 		'rgbVertShaderText',
 		'rgbFragShaderText',
-		//'coneJSON',
-		'coneJSON'
+		'coneJSON', // Make sure these JSONs are in the same order as in the urls function
+		'tableJSON' // Got some flipped textures by accident
 	];
 
 	// file types, respective (text or JSON)
@@ -166,7 +166,7 @@ var InitDemo = function()
 		'text',
 		'text',
 		'text',
-		//'json',
+		'json',
 		'json'
 	];
 	
