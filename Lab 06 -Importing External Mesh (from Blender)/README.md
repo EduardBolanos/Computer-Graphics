@@ -1,7 +1,7 @@
 # Lab 06: Importing External Mesh (from Blender)
 
-1. Download suzyDemo.zip
-2. Download io_three.zip and install the exporter in Blender.
+1. Download [suzyDemo.zip](https://github.com/EduardBolanos/Computer-Graphics/tree/master/OriginalLabs)
+2. Download [io_three.zip](https://github.com/EduardBolanos/Computer-Graphics/tree/master/OriginalLabs) and install the exporter in Blender.
 3. Next we'll make and texture two simple models in Blender:
     -  Create a "models" folder in your project.
     -  Create and unwrap a cube in Blender. Use the UV editor to map it onto the provided "cube-texture.jpg" or another texture of your choosing. Export as a JSON named "cube.json" using the ThreeJS add-on to Blender (requires Blender 2.79).
