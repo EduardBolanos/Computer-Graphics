@@ -113,15 +113,15 @@ var RunDemo = function (filemap)
 
 	// use imported JSONs / textures to create models
 	//change JSON to THREEJS
-	var cone = ThreeJSToUVMesh(filemap['coneJSON'], 'cone-texture', gl, uvProgram, true);
+	var pokeball = ThreeJSToUVMesh(filemap['pokeballJSON'], 'pokeball-texture', gl, uvProgram, true);
 	var table = ThreeJSToUVMesh(filemap['tableJSON'], 'table-texture', gl, uvProgram, true);
 	var coffee = ThreeJSToUVMesh(filemap['coffeeJSON'], 'coffee-texture', gl, uvProgram, true);
-	var chair = ThreeJSToUVMesh(filemap['chairJSON'], 'chair-texture', gl, uvProgram, true);
 
-	cone.translate(new Vector(-2, 0, 0));
+
+	pokeball.translate(new Vector(-1, 0, 0));
 	table.translate(new Vector(2, 0, 0));
 	coffee.translate(new Vector(-4, 0, 0));
-	chair.translate(new Vector(4, 0, 0));
+
 
 	// set up some arbitrary constants for motion
 	var angle = Math.PI / 100;
@@ -131,8 +131,8 @@ var RunDemo = function (filemap)
 	{
 		gl.clear(gl.DEPTH_BUFFER_BIT | gl.COLOR_BUFFER_BIT);
 
-		cone.rotate(rotation);
-		cone.draw();
+		pokeball.rotate(rotation);
+		pokeball.draw();
 
 		table.rotate(rotation);
 		table.draw();
@@ -140,8 +140,6 @@ var RunDemo = function (filemap)
 		coffee.rotate(rotation);
 		coffee.draw();
 
-		chair.rotate(rotation);
-		chair.draw();
 
 		requestAnimationFrame(main);
 	}
@@ -156,10 +154,9 @@ var InitDemo = function()
 		'shaders/frag.uv.glsl',
 		'shaders/vert.uv.glsl',
 		'shaders/frag.uv.glsl',
-		'models/cone.json',
+		'models/pokeball.json',
 		'models/table.json',
-		'models/coffee.json',
-		'models/chair.json'
+		'models/coffee.json'
 	];
 
 	// imported file keys for file key-value map, respective
@@ -168,10 +165,9 @@ var InitDemo = function()
 		'uvFragShaderText',
 		'rgbVertShaderText',
 		'rgbFragShaderText',
-		'coneJSON', // Make sure these JSONs are in the same order as in the urls function
+		'pokeballJSON', // Make sure these JSONs are in the same order as in the urls function
 		'tableJSON', // Got some flipped textures by accident
-		'coffeeJSON',
-		'chairJSON'
+		'coffeeJSON'
 	];
 
 	// file types, respective (text or JSON)
@@ -180,7 +176,6 @@ var InitDemo = function()
 		'text',
 		'text',
 		'text',
-		'json',
 		'json',
 		'json',
 		'json'
