@@ -115,9 +115,13 @@ var RunDemo = function (filemap)
 	//change JSON to THREEJS
 	var cone = ThreeJSToUVMesh(filemap['coneJSON'], 'cone-texture', gl, uvProgram, true);
 	var table = ThreeJSToUVMesh(filemap['tableJSON'], 'table-texture', gl, uvProgram, true);
+	var coffee = ThreeJSToUVMesh(filemap['coffeeJSON'], 'coffee-texture', gl, uvProgram, true);
+	var chair = ThreeJSToUVMesh(filemap['chairJSON'], 'chair-texture', gl, uvProgram, true);
 
 	cone.translate(new Vector(-2, 0, 0));
 	table.translate(new Vector(2, 0, 0));
+	coffee.translate(new Vector(-4, 0, 0));
+	chair.translate(new Vector(4, 0, 0));
 
 	// set up some arbitrary constants for motion
 	var angle = Math.PI / 100;
@@ -133,6 +137,12 @@ var RunDemo = function (filemap)
 		table.rotate(rotation);
 		table.draw();
 
+		coffee.rotate(rotation);
+		coffee.draw();
+
+		chair.rotate(rotation);
+		chair.draw();
+
 		requestAnimationFrame(main);
 	}
 	requestAnimationFrame(main);
@@ -147,7 +157,9 @@ var InitDemo = function()
 		'shaders/vert.uv.glsl',
 		'shaders/frag.uv.glsl',
 		'models/cone.json',
-		'models/table.json'
+		'models/table.json',
+		'models/coffee.json',
+		'models/chair.json'
 	];
 
 	// imported file keys for file key-value map, respective
@@ -157,7 +169,9 @@ var InitDemo = function()
 		'rgbVertShaderText',
 		'rgbFragShaderText',
 		'coneJSON', // Make sure these JSONs are in the same order as in the urls function
-		'tableJSON' // Got some flipped textures by accident
+		'tableJSON', // Got some flipped textures by accident
+		'coffeeJSON',
+		'chairJSON'
 	];
 
 	// file types, respective (text or JSON)
@@ -166,6 +180,8 @@ var InitDemo = function()
 		'text',
 		'text',
 		'text',
+		'json',
+		'json',
 		'json',
 		'json'
 	];
