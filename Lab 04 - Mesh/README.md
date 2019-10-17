@@ -1,6 +1,6 @@
 # Lab 04: Mesh
 
-1. Download meshDemo.zip
+1. Download [meshDemo.zip](https://github.com/EduardBolanos/Computer-Graphics/tree/master/OriginalLabs)
 2. Follow the example the completed vertex and fragment shaders "vert.rgb.glsl" and "frag.rgb.glsl".
 3. Follow the example the completed the Mesh class (skeleton provided).
     - Mesh.constructor
