@@ -116,11 +116,13 @@ var RunDemo = function (filemap)
 	var pokeball = ThreeJSToUVMesh(filemap['pokeballJSON'], 'pokeball-texture', gl, uvProgram, true);
 	var table = ThreeJSToUVMesh(filemap['tableJSON'], 'table-texture', gl, uvProgram, true);
 	var coffee = ThreeJSToUVMesh(filemap['coffeeJSON'], 'coffee-texture', gl, uvProgram, true);
+	var dice = ThreeJSToUVMesh(filemap['diceJSON'], 'dice-texture', gl, uvProgram, true);
 
 
 	pokeball.translate(new Vector(-1, 0, 0));
 	table.translate(new Vector(2, 0, 0));
 	coffee.translate(new Vector(-4, 0, 0));
+	dice.translate(new Vector(4, 0, 0));
 
 
 	// set up some arbitrary constants for motion
@@ -140,6 +142,9 @@ var RunDemo = function (filemap)
 		coffee.rotate(rotation);
 		coffee.draw();
 
+		dice.rotate(rotation);
+		dice.draw();
+
 
 		requestAnimationFrame(main);
 	}
@@ -156,7 +161,8 @@ var InitDemo = function()
 		'shaders/frag.uv.glsl',
 		'models/pokeball.json',
 		'models/table.json',
-		'models/coffee.json'
+		'models/coffee.json',
+		'models/dice.json'
 	];
 
 	// imported file keys for file key-value map, respective
@@ -167,7 +173,8 @@ var InitDemo = function()
 		'rgbFragShaderText',
 		'pokeballJSON', // Make sure these JSONs are in the same order as in the urls function
 		'tableJSON', // Got some flipped textures by accident
-		'coffeeJSON'
+		'coffeeJSON',
+		'diceJSON'
 	];
 
 	// file types, respective (text or JSON)
@@ -176,6 +183,7 @@ var InitDemo = function()
 		'text',
 		'text',
 		'text',
+		'json',
 		'json',
 		'json',
 		'json'
