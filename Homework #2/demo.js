@@ -117,12 +117,16 @@ var RunDemo = function (filemap)
 	var table = ThreeJSToUVMesh(filemap['tableJSON'], 'table-texture', gl, uvProgram, true);
 	var coffee = ThreeJSToUVMesh(filemap['coffeeJSON'], 'coffee-texture', gl, uvProgram, true);
 	var dice = ThreeJSToUVMesh(filemap['diceJSON'], 'dice-texture', gl, uvProgram, true);
+	var barrel = ThreeJSToUVMesh(filemap['barrelJSON'], 'barrel-texture', gl, uvProgram, true);
+	var world = ThreeJSToUVMesh(filemap['worldJSON'], 'world-texture', gl, uvProgram, true);
 
 
 	pokeball.translate(new Vector(-1, 0, 0));
 	table.translate(new Vector(2, 0, 0));
 	coffee.translate(new Vector(-4, 0, 0));
 	dice.translate(new Vector(4, 0, 0));
+	barrel.translate(new Vector(-3, -3, 0));
+	world.translate(new Vector(3, -2, 0));
 
 
 	// set up some arbitrary constants for motion
@@ -145,6 +149,12 @@ var RunDemo = function (filemap)
 		dice.rotate(rotation);
 		dice.draw();
 
+		barrel.rotate(rotation);
+		barrel.draw();
+
+		world.rotate(rotation);
+		world.draw();
+
 
 		requestAnimationFrame(main);
 	}
@@ -162,7 +172,9 @@ var InitDemo = function()
 		'models/pokeball.json',
 		'models/table.json',
 		'models/coffee.json',
-		'models/dice.json'
+		'models/dice.json',
+		'models/barrel.json',
+		'models/world.json'
 	];
 
 	// imported file keys for file key-value map, respective
@@ -174,7 +186,9 @@ var InitDemo = function()
 		'pokeballJSON', // Make sure these JSONs are in the same order as in the urls function
 		'tableJSON', // Got some flipped textures by accident
 		'coffeeJSON',
-		'diceJSON'
+		'diceJSON',
+		'barrelJSON',
+		'worldJSON'
 	];
 
 	// file types, respective (text or JSON)
@@ -183,6 +197,8 @@ var InitDemo = function()
 		'text',
 		'text',
 		'text',
+		'json',
+		'json',
 		'json',
 		'json',
 		'json',
