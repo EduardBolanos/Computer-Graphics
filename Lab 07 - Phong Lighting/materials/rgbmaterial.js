@@ -28,7 +28,7 @@ class RGBMaterial
 
 	activate()
 	{
-		this.update();
+		//this.update();
 		this.gl.useProgram(this.program);
 
 		// TODO update set the values of material uniforms in the shader program

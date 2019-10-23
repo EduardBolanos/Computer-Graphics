@@ -46,7 +46,7 @@ class UVMaterial
 		// TODO update set the values of material uniforms in the shader program
 		// HINT: material parameters here are single floats, so use the gl context's uniform1f function
 
-		this.update();
+		//sthis.update();
 		this.gl.useProgram(this.program);
 
 		this.gl.uniform1f(this.diffuseUniformLocation, this.diffuse);

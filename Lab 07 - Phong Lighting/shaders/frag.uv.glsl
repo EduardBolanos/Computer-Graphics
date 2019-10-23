@@ -48,4 +48,5 @@ void main()
 {
 	vec4 texel = texture2D(sampler, fragTexCoord);
 	// TODO complete the main method (determine what color the fragment should be, assign to gl_FragColor)
+	gl_FragColor = vec4(9.0, 8.0, 5.0, 1.0);
 }

@@ -42,5 +42,6 @@ varying vec3 fragNormal;
 
 void main()
 {
-	// TODO decide what color the fragment should be, assign to gl_FragColor	
+	// TODO decide what color the fragment should be, assign to gl_FragColor
+	gl_FragColor = vec4(9.0, 8.0, 5.0, 1.0);
 }
