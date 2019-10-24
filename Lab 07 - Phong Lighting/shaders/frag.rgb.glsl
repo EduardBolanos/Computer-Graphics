@@ -107,8 +107,8 @@ void main()
 	
 	for(int i = 0; i < 16; i++)
 	{
-		totalColor += calc_directional_light(directionalLights[i], material, fragPosition, fragNormal);
-		totalColor += calc_point_light(pointLights[i], material, fragPosition, fragNormal);
+		totalColor += calculateDirectionalLight(directionalLights[i], material, fragPosition, fragNormal);
+		totalColor += calculatePointLight(pointLights[i], material, fragPosition, fragNormal);
 	}
 	
 	gl_FragColor = totalColor;
