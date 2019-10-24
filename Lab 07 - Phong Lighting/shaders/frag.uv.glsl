@@ -44,9 +44,72 @@ varying vec3 fragNormal;
 varying vec2 fragTexCoord;
 uniform sampler2D sampler;
 
+//idk
+
+vec4 calculateDirectionalLight(DirectionalLight light, Material calcFragMaterial, vec3 calcFragPostion, vec3 calcFragNormal)
+{
+	vec4 ambient = vec4(0.0, 0.0, 0.0, 0.0);
+	vec4 diffuse = vec4(0.0, 0.0, 0.0, 0.0);
+	vec4 specular = vec4(0.0, 0.0, 0.0, 0.0);
+	
+	float diffuseFactor = dot(-light.direction, calcFragNormal);
+
+	ambient = vec4(light.ambient, 1.0) * calcFragMaterial.ambient;
+	
+	if(diffuseFactor > 0.0)
+	{	
+		vec3 directionToCamera = normalize(cameraPosition - calcFragPostion);
+		vec3 flippedLightDirection = normalize(((2.0 * dot(-light.direction, calcFragNormal)) * calcFragNormal) + light.direction);
+		float specularFactor = dot(directionToCamera, flippedLightDirection);
+		if(specularFactor > 0.0)
+		{
+			specular = vec4(light.specular * pow(specularFactor, calcFragMaterial.shininess) * calcFragMaterial.specular, 1.0);
+		}
+	}
+	
+	return ambient + diffuse + specular;
+}
+
+vec4 calculatePointLight(PointLight light, Material calcFragMaterial, vec3 calcFragPostion, vec3 calcFragNormal)
+{
+	vec4 ambient = vec4(0.0, 0.0, 0.0, 0.0);
+	vec4 diffuse = vec4(0.0, 0.0, 0.0, 0.0);
+	vec4 specular = vec4(0.0, 0.0, 0.0, 0.0);
+	
+	vec3 distance = calcFragPostion - light.position;
+	float distance2 = (distance.x * distance.x) + (distance.y * distance.y) + (distance.z * distance.z);
+	vec3 lightDirection = normalize(distance);
+	
+	float diffuseFactor = dot(-lightDirection, calcFragNormal);
+
+	ambient = vec4(light.ambient, 1.0) * calcFragMaterial.ambient;
+	
+	if(diffuseFactor > 0.0)
+	{		
+		diffuse = vec4(light.diffuse * diffuseFactor, 1.0) * calcFragMaterial.diffuse;
+		
+		vec3 directionFromCamera = normalize(calcFragPostion - cameraPosition);
+		vec3 flippedLightDirection = normalize(((2.0 * dot(-lightDirection, calcFragNormal)) * calcFragNormal) + lightDirection);
+		float specularFactor = dot(directionFromCamera, flippedLightDirection);
+		if(specularFactor > 0.0)
+		{
+			specular = vec4(light.specular * pow(specularFactor, calcFragMaterial.shininess), 1.0) * calcFragMaterial.specular;
+		}
+	}
+	
+	return ambient + ((diffuse + specular) / (distance2 + 1.0));
+}
+
 void main()
 {
 	vec4 texel = texture2D(sampler, fragTexCoord);
 	// TODO complete the main method (determine what color the fragment should be, assign to gl_FragColor)
-	gl_FragColor = vec4(9.0, 8.0, 5.0, 1.0);
+	vec4 totalColor = vec4(ambientLight, 1.0);
+	
+	for(int i = 0; i < 16; i++)
+	{
+		totalColor += calculateDirectionalLight(directionalLights[i], material, fragPosition, fragNormal);
+	}
+	
+	gl_FragColor = texel * totalColor;
 }
