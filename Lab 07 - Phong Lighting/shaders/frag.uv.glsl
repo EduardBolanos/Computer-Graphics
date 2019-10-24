@@ -3,7 +3,7 @@ precision mediump float;
 // data type definitions
 struct DirectionalLight
 {
-	vec3 direction; // xyz direction of light -sl
+	vec3 direction; // xyz direction of light
 	vec3 ambient; // rgb contribution to scene ambient light
 	vec3 diffuse; // rgb intensity of diffuse 
 	vec3 specular; // rgb intensity of specular
@@ -44,72 +44,58 @@ varying vec3 fragNormal;
 varying vec2 fragTexCoord;
 uniform sampler2D sampler;
 
-//idk
-
-vec4 calculateDirectionalLight(DirectionalLight light, Material calcFragMaterial, vec3 calcFragPostion, vec3 calcFragNormal)
-{
-	vec4 ambient = vec4(0.0, 0.0, 0.0, 0.0);
-	vec4 diffuse = vec4(0.0, 0.0, 0.0, 0.0);
-	vec4 specular = vec4(0.0, 0.0, 0.0, 0.0);
-	
-	float diffuseFactor = dot(-light.direction, calcFragNormal);
-
-	ambient = vec4(light.ambient, 1.0) * calcFragMaterial.ambient;
-	
-	if(diffuseFactor > 0.0)
-	{	
-		vec3 directionToCamera = normalize(cameraPosition - calcFragPostion);
-		vec3 flippedLightDirection = normalize(((2.0 * dot(-light.direction, calcFragNormal)) * calcFragNormal) + light.direction);
-		float specularFactor = dot(directionToCamera, flippedLightDirection);
-		if(specularFactor > 0.0)
-		{
-			specular = vec4(light.specular * pow(specularFactor, calcFragMaterial.shininess) * calcFragMaterial.specular, 1.0);
-		}
-	}
-	
-	return ambient + diffuse + specular;
-}
-
-vec4 calculatePointLight(PointLight light, Material calcFragMaterial, vec3 calcFragPostion, vec3 calcFragNormal)
-{
-	vec4 ambient = vec4(0.0, 0.0, 0.0, 0.0);
-	vec4 diffuse = vec4(0.0, 0.0, 0.0, 0.0);
-	vec4 specular = vec4(0.0, 0.0, 0.0, 0.0);
-	
-	vec3 distance = calcFragPostion - light.position;
-	float distance2 = (distance.x * distance.x) + (distance.y * distance.y) + (distance.z * distance.z);
-	vec3 lightDirection = normalize(distance);
-	
-	float diffuseFactor = dot(-lightDirection, calcFragNormal);
-
-	ambient = vec4(light.ambient, 1.0) * calcFragMaterial.ambient;
-	
-	if(diffuseFactor > 0.0)
-	{		
-		diffuse = vec4(light.diffuse * diffuseFactor, 1.0) * calcFragMaterial.diffuse;
-		
-		vec3 directionFromCamera = normalize(calcFragPostion - cameraPosition);
-		vec3 flippedLightDirection = normalize(((2.0 * dot(-lightDirection, calcFragNormal)) * calcFragNormal) + lightDirection);
-		float specularFactor = dot(directionFromCamera, flippedLightDirection);
-		if(specularFactor > 0.0)
-		{
-			specular = vec4(light.specular * pow(specularFactor, calcFragMaterial.shininess), 1.0) * calcFragMaterial.specular;
-		}
-	}
-	
-	return ambient + ((diffuse + specular) / (distance2 + 1.0));
-}
-
 void main()
 {
-	vec4 texel = texture2D(sampler, fragTexCoord);
+	vec4 texel = texture2D(sampler, fragTexCoord);	
 	// TODO complete the main method (determine what color the fragment should be, assign to gl_FragColor)
-	vec4 totalColor = vec4(ambientLight, 1.0);
-	
-	for(int i = 0; i < 16; i++)
+	vec3 ambient = ambientLight;
+	vec3 diffuse = vec3(0.0, 0.0, 0.0);
+	vec3 specular = vec3(0.0, 0.0, 0.0);
+
+	for (int i = 0; i < 16; i++)
 	{
-		totalColor += calculateDirectionalLight(directionalLights[i], material, fragPosition, fragNormal);
-	}
-	
-	gl_FragColor = texel * totalColor;
+	ambient += directionalLights[i].ambient;
+		ambient += pointLights[i].ambient;
+
+
+
+
+		vec3 Sl = -directionalLights[i].direction;
+		float d = dot(Sl, fragNormal);
+		vec3 Rl = reflect(Sl, fragNormal);
+		vec3 V = normalize(cameraPosition - fragPosition);
+		if(d > 0.0){
+			diffuse += d * directionalLights[i].diffuse;
+			float rad2 = length(directionalLights[i].direction - fragPosition);
+			float r = dot(Rl, V);
+			if(r > 0.0){
+				specular += pow(r, material.shininess) 
+					* directionalLights[i].specular 
+					/ (rad2 * rad2 + 1.0);
+			}
+		}
+
+
+
+		Sl = normalize(pointLights[i].position - fragPosition);
+		float oof = dot(Sl, fragNormal);
+		if(oof > 0.0){
+			float rad = length(pointLights[i].position - fragPosition);
+			diffuse += oof * pointLights[i].diffuse / (rad * rad + 1.0); 
+			
+			Rl = reflect(Sl, fragNormal);
+			float oof2 = dot(Rl, V);
+
+			if(oof2 > 0.0){
+				specular += pow(oof2, material.shininess) 
+					* pointLights[i].specular 
+					/ (rad * rad + 1.0);
+			}
+		}
+	 }
+
+	vec3 light = (material.ambient * ambient) + (material.diffuse * diffuse) + (material.specular * specular);
+
+	gl_FragColor = vec4(light * texel.rgb, texel.a);
 }
+

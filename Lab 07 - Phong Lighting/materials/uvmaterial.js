@@ -14,10 +14,10 @@ class UVMaterial
 		this.shininess = shininess;
 
 		// TODO store locations of Uniforms holding material attributes in the shader (look in the shader for their names)
-		this.diffuseUniformLocation = gl.getUniformLocation(this.program, 'material_diffuse');
-		this.specularUniformLocation = gl.getUniformLocation(this.program, 'material_specular');
-		this.ambientUniformLocation = gl.getUniformLocation(this.program, 'material_ambient');
-		this.shininessUniformLocation = gl.getUniformLocation(this.program, 'material_shininess');
+		this.diffuseUniformLocation = gl.getUniformLocation(this.program, 'material.diffuse');
+		this.specularUniformLocation = gl.getUniformLocation(this.program, 'material.specular');
+		this.ambientUniformLocation = gl.getUniformLocation(this.program, 'material.ambient');
+		this.shininessUniformLocation = gl.getUniformLocation(this.program, 'material.shininess');
 		
 		// TODO create, bind, set paramaters for texture object (see UVMesh from previous labs)
 		// don't forget to unbind the texture when you're done!
@@ -28,15 +28,7 @@ class UVMaterial
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-
-		gl.texImage2D(
-			gl.TEXTURE_2D,
-			0,
-			gl.RGBA,
-			gl.RGBA,
-			gl.UNSIGNED_BYTE,
-			document.getElementById(imageID)
-		)
+		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, document.getElementById(imageID));
 		gl.bindTexture(gl.TEXTURE_2D, null);
 
 	}
@@ -47,7 +39,7 @@ class UVMaterial
 		// HINT: material parameters here are single floats, so use the gl context's uniform1f function
 
 		//sthis.update();
-		this.gl.useProgram(this.program);
+		//this.gl.useProgram(this.program);
 
 		this.gl.uniform1f(this.diffuseUniformLocation, this.diffuse);
 		this.gl.uniform1f(this.specularUniformLocation, this.specular);

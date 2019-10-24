@@ -19,17 +19,17 @@ class RGBMaterial
 
 
 		// TODO store locations of Uniforms holding material attributes in the shader (look in the shader for their names)
-		this.diffuseUniformLocation = gl.getUniformLocation(this.program, 'material_diffuse');
-		this.specularUniformLocation = gl.getUniformLocation(this.program, 'material_specular');
-		this.ambientUniformLocation = gl.getUniformLocation(this.program, 'material_ambient');
-		this.shininessUniformLocation = gl.getUniformLocation(this.program, 'material_shininess');
+		this.diffuseUniformLocation = gl.getUniformLocation(this.program, 'material.diffuse');
+		this.specularUniformLocation = gl.getUniformLocation(this.program, 'material.specular');
+		this.ambientUniformLocation = gl.getUniformLocation(this.program, 'material.ambient');
+		this.shininessUniformLocation = gl.getUniformLocation(this.program, 'material.shininess');
 
 	}
 
 	activate()
 	{
 		//this.update();
-		this.gl.useProgram(this.program);
+		//this.gl.useProgram(this.program);
 
 		// TODO update set the values of material uniforms in the shader program
 		// HINT: diffuse, specular, and ambient are all 3 floats stored in a single array,
@@ -39,8 +39,6 @@ class RGBMaterial
 		this.gl.uniform3fv(this.ambientUniformLocation, this.ambient);
 
 		// shininess is a single float, so use uniform1f.
-		this.gl.uniform1f(this.shininessUniformLocation, this.shininess);
-
-		
+		this.gl.uniform1f(this.shininessUniformLocation, this.shininess);		
 	}
 }
