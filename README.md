@@ -15,7 +15,13 @@ Lab 05: Texturing and Spheres
 
 Lab 06: Importing External Mesh (from Blender)
 
+Lab 07: Phong Lighting
+
+Lab 08: View and Projection
+
 ## Homework
 Homework 01: Transform
 
 Homework 02: Models
+
+Homework 03: Camera and Lights
