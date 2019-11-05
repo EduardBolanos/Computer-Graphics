@@ -136,6 +136,14 @@ class Matrix
 	// TODO AND IMPLEMENT TEST IF YOU'RE BORED...
 	static orthographic(left=-2, right=2, bottom=-2, top=2, near=0.1, far=1000.0)
 	{
-		
+		var lr = 1/(left-right);
+		var bt = 1/(bottom-top);
+		var nf = 1/(near-far);
+		return new Float32Array([
+			-2*lr,           0,               0,             0,
+			0,               -2*bt,           0,             0,
+			0,               0,               2*nf,          0,
+			(left+right)*lr, (top+bottom)*bt, (near+far)*nf, 1
+		]);
 	}
 }
