@@ -104,42 +104,31 @@ class Matrix
 	// TODO
 	static view(eye, target, up)
 	{
-		var z_axis = target.subtract(eye, false);
-		z_axis.normalize();
-
-		var x_axis = Vector.cross(up, z_axis);
-		x_axis.normalize();
-
-		var y_axis = Vector.cross(z_axis, x_axis);
+		var Z = eye.subtract(target, false);
+		Z.normalize();
+		var X = Vector.cross(up, Z);
+		X.normalize();
+		var Y = Vector.cross(Z, X);
+		Y.normalize();
 
 		return new Float32Array([
-			x_axis.x,   x_axis.y,   x_axis.z,   -Vector.dot(x_axis, eye),
-			y_axis.x,   y_axis.y,   y_axis.z,   -Vector.dot(y_axis, eye),
-			z_axis.x,   z_axis.y,   z_axis.z,   -Vector.dot(z_axis, eye),
-			0, 0, 0, 1
+			X.x,                 Y.x,                 Z.x,                   0,
+			X.y,                 Y.y,                 Z.y,                   0,
+			X.z,                 Y.z,                 Z.z,                   0,
+			-Vector.dot(X, eye), -Vector.dot(Y, eye), -Vector.dot(Z, eye),   1
 		]);
 	}
 
 	// TODO
 	static perspective(viewRadians=Math.PI/4, aspect=1, near=0.01, far=1000.0)
 	{
-		var top = near * Math.tan(viewRadians/2);
-		var bottom = -top;
-		var right = top * aspect;
-		var left = -right;
-
-		var topminusbottom = top-bottom;
-		var farminusnear = far-near;
-		var rightminusleft = right-left;
-		var topplusbottom = top+bottom;
-		var farplusnear = far+near;
-		var rightplusleft = right+left;
-
+		var f = 1 / Math.tan(viewRadians/2);
+		var n = 1 / (near - far);
 		return new Float32Array([
-			2*near/rightminusleft, 0,          0,                0,
-			0,          2*near/topminusbottom, 0,                0,
-			rightplusleft/rightminusleft,    topplusbottom/topminusbottom,    -farplusnear/farminusnear,        -1,
-			0,          0,          -2*far*near/farminusnear,  0
+			f/aspect, 0, 0,             0,
+			0,        f, 0,             0,
+			0,        0, (near+far)*n,  -1,
+			0,        0, 2*near*far*n,  0
 		]);
 
 	}
