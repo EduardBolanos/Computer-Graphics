@@ -1,3 +1,5 @@
+# Lab 08 - View and Projection
+
 1. Download [cameraDemo.zip](https://github.com/EduardBolanos/Computer-Graphics/tree/master/OriginalLabs)
 2. Complete the two "TODO"s in core/matrix.js (the view and projection matrices).
 3. Complete all "TODO"s in cameras/perspectiveCamera.js
