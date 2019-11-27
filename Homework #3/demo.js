@@ -139,7 +139,7 @@ var RunDemo = function (filemap)
 	var emeraldRefractiveIndex = 2.0;
 	// create an emerald glass monkey head
 	var emeraldSuzy = ThreeJSToRGBGlassMesh(
-		filemap['riadoncrackJSON'],
+		filemap['hiryanJSON'],
 		gl,
 		rgbglassProgram,
 		skyboxImageIDs,
@@ -293,7 +293,8 @@ var InitDemo = function()
 		'shaders/frag.uvglass.glsl',
 		'models/suzy.json',
 		'models/suzyThree.json',
-		'models/riadoncrack.json'
+		'models/riadoncrack.json',
+		'models/hiryan.json'
 	];
 
 	// imported file keys for file key-value map, respective to locations
@@ -310,7 +311,8 @@ var InitDemo = function()
 		'uvglassFragShaderText',
 		'suzyJSON',
 		'suzyThreeJSON',
-		'riadoncrackJSON'
+		'riadoncrackJSON',
+		'hiryanJSON'
 	];
 
 	// file types, respective to locations (text or JSON)
@@ -325,6 +327,7 @@ var InitDemo = function()
 		'text',
 		'text',
 		'text',
+		'json',
 		'json',
 		'json',
 		'json'
