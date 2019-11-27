@@ -116,9 +116,9 @@ var RunDemo = function (filemap)
 
 
 	// rgb emerald material properties
-	var emeraldDiffuse = new Vector(0.07568, 0.61424, 0.07568);
-	var emeraldSpecular = new Vector(0.633, 0.727811, 0.633);
-	var emeraldAmbient = new Vector(0.0215, 0.1745, 0.0215);
+	var emeraldDiffuse = 0.07568;
+	var emeraldSpecular = 0.633;
+	var emeraldAmbient = 0.0215;
 	var emeraldShininess = 0.6;
 
 	// create emerald monkey head
@@ -138,10 +138,12 @@ var RunDemo = function (filemap)
 	var emeraldRefractionIntensity = 0.4;
 	var emeraldRefractiveIndex = 2.0;
 	// create an emerald glass monkey head
-	var emeraldSuzy = JSONToRGBGlassMesh(
-		filemap['suzyJSON'],
+	var emeraldSuzy = ThreeJSToUVGlassMesh(
+		filemap['riadoncrackJSON'],
 		gl,
-		rgbglassProgram,
+		uvglassProgram,
+		'riad-texture',
+		false,
 		skyboxImageIDs,
 		emeraldReflectionIntensity,
 		emeraldRefractionIntensity,
@@ -181,7 +183,7 @@ var RunDemo = function (filemap)
 	// 	earthSpecular,
 	// 	earthAmbient,
 	// 	earthShininess
-	// );
+	// );a
 
 	glassEarth = ThreeJSToUVGlassMesh(
 		filemap['riadoncrackJSON'],
@@ -202,10 +204,16 @@ var RunDemo = function (filemap)
 	glassEarth.translate(new Vector(2, 0, 0));
 
 	// set up models to follow point lights
-	lightSuzy1 = JSONToRGBMesh(
-		filemap['suzyJSON'],
+	lightSuzy1 = ThreeJSToUVGlassMesh(
+		filemap['riadoncrackJSON'],
 		gl,
-		rgbProgram,
+		uvglassProgram,
+		'riad-texture',
+		false,
+		skyboxImageIDs,
+		emeraldReflectionIntensity,
+		emeraldRefractionIntensity,
+		emeraldRefractiveIndex,
 		emeraldDiffuse,
 		emeraldSpecular,
 		emeraldAmbient,
@@ -214,10 +222,16 @@ var RunDemo = function (filemap)
 
 	lightSuzy1.setScale(new Vector(0.1, 0.1, 0.1));
 
-	lightSuzy2 = JSONToRGBMesh(
-		filemap['suzyJSON'],
+	lightSuzy2 = ThreeJSToUVGlassMesh(
+		filemap['riadoncrackJSON'],
 		gl,
-		rgbProgram,
+		uvglassProgram,
+		'riad-texture',
+		false,
+		skyboxImageIDs,
+		emeraldReflectionIntensity,
+		emeraldRefractionIntensity,
+		emeraldRefractiveIndex,
 		emeraldDiffuse,
 		emeraldSpecular,
 		emeraldAmbient,
